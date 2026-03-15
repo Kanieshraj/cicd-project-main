@@ -39,6 +39,7 @@ pipeline {
         bat 'docker logs cicd-project-backend-1'
     }
 }
+  }
 
   post {
     success {
