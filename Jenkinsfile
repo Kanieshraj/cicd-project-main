@@ -34,12 +34,11 @@ pipeline {
     }
 
     stage('Verify Backend Logs') {
-      steps {
-        echo '📄 Backend container logs:'
-        bat 'docker logs recipeapp-backend-1 || true'
-      }
+    steps {
+        echo 'Backend container logs:'
+        bat 'docker logs cicd-project-backend-1'
     }
-  }
+}
 
   post {
     success {
