@@ -23,7 +23,6 @@ Steps:
 3. Add ingredients one by one and cook well.
 4. Add salt and spices as needed.
 5. Cook for 10-15 minutes.
-6. Serve hot and enjoy
 
 👨‍🍳 Tip: You can customize with your favorite spices!
       `;
