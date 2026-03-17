@@ -4,58 +4,75 @@
 
 body {
     margin: 0;
-    font-family: Inter, sans-serif;
-    background-color: #FAFAF8;
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #fdfbfb, #ebedee);
 }
 
+/* HEADER */
 header {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 11px;
+    gap: 12px;
     height: 80px;
-    background-color: white;
-    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    color: white;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
 }
 
 header > img {
-    width: 50px;
+    width: 45px;
 }
 
 header > h1 {
-    font-weight: 400;
+    font-weight: 500;
+    letter-spacing: 1px;
 }
 
+/* MAIN */
 main {
-    padding: 30px 30px 10px;
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: auto;
 }
 
+/* FORM */
 .add-ingredient-form {
     display: flex;
     justify-content: center;
     gap: 12px;
-    height: 38px;
+    margin-bottom: 30px;
 }
 
 .add-ingredient-form > input {
-    border-radius: 6px;
-    border: 1px solid #D1D5DB;
-    padding: 9px 13px;
-    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    border: 1px solid #ddd;
+    padding: 12px;
     flex-grow: 1;
-    min-width: 150px;
     max-width: 400px;
+    transition: 0.3s;
+}
+
+.add-ingredient-form > input:focus {
+    outline: none;
+    border-color: #ff7e5f;
+    box-shadow: 0 0 5px rgba(255,126,95,0.5);
 }
 
 .add-ingredient-form > button {
-    font-family: Inter, sans-serif;
-    border-radius: 6px;
+    border-radius: 10px;
     border: none;
-    background-color: #141413;
-    color: #FAFAF8;
-    width: 150px;
-    font-size: 0.875rem;
+    background: linear-gradient(90deg, #ff7e5f, #feb47b);
+    color: white;
+    width: 160px;
     font-weight: 500;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.add-ingredient-form > button:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
 
 .add-ingredient-form > button::before {
@@ -63,44 +80,85 @@ main {
     margin-right: 5px;
 }
 
+/* INGREDIENT LIST */
 ul.ingredients-list {
-    margin-bottom: 48px;
+    margin-bottom: 30px;
+    padding: 20px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
 ul.ingredients-list > li {
-    color: #475467;
+    color: #374151;
     line-height: 28px;
+    transition: 0.2s;
 }
 
+ul.ingredients-list > li:hover {
+    transform: translateX(5px);
+    color: #ff7e5f;
+}
+
+/* GET RECIPE BOX */
 .get-recipe-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    border-radius: 8px;
-    background: #F0EFEB;
-    padding: 10px 28px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #fff, #f3f4f6);
+    padding: 20px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.05);
 }
 
 .get-recipe-container h3 {
-    font-size: 1.125rem;
-    font-weight: 500;
-    line-height: 24px;
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
 .get-recipe-container p {
     color: #6B7280;
-    font-size: 0.875rem;
-    line-height: 20px;
+    font-size: 0.9rem;
 }
 
 .get-recipe-container button {
     border: none;
-    border-radius: 6px;
-    background: #D17557;
-    box-shadow: 0px 1px 2px 0px rgba(0, 0, 0, 0.05);
-    color: #FAFAF8;
-    padding: 9px 17px;
-    font-family: Inter, sans-serif;
-    font-size: 0.875rem;
+    border-radius: 8px;
+    background: #ff7e5f;
+    color: white;
+    padding: 10px 18px;
     cursor: pointer;
+    transition: 0.3s;
+}
+
+.get-recipe-container button:hover {
+    background: #e85c3f;
+    transform: scale(1.05);
+}
+
+/* RECIPE OUTPUT */
+.suggested-recipe-container {
+    margin-top: 30px;
+    padding: 20px;
+    border-radius: 12px;
+    background: #ffffff;
+    box-shadow: 0 4px 25px rgba(0,0,0,0.08);
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+.suggested-recipe-container pre {
+    white-space: pre-wrap;
+    font-family: inherit;
+}
+
+/* ANIMATION */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
