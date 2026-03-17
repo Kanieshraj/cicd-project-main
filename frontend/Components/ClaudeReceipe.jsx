@@ -1,27 +1,45 @@
 import React from "react";
-import axios from "axios";
 
 export default function ClaudeRecipe({ ingredients }) {
   const [recipe, setRecipe] = React.useState("");
   const [loading, setLoading] = React.useState(true);
 
   React.useEffect(() => {
-    async function fetchRecipe() {
-      setLoading(true);
-      try {
-        const response = await axios.post("http://localhost:5000/get-recipe", {
-          ingredients: ingredients.join(", "),
-        });
-        setRecipe(response.data.recipe);
-      } catch (error) {
-        console.error("Fetch error:", error.message);
-        setRecipe("Failed to fetch recipe.");
-      } finally {
-        setLoading(false);
+    function generateRecipe(ingredients) {
+      if (!ingredients || ingredients.length === 0) {
+        return "No ingredients provided.";
       }
+
+      // Simple logic (you can improve this later)
+      const baseRecipe = `
+🍽️ Simple Recipe Idea:
+
+Ingredients:
+${ingredients.map(item => `- ${item}`).join("\n")}
+
+Steps:
+1. Prepare all ingredients.
+2. Heat a pan and add some oil.
+3. Add ingredients one by one and cook well.
+4. Add salt and spices as needed.
+5. Cook for 10-15 minutes.
+6. Serve hot and enjoy!
+
+👨‍🍳 Tip: You can customize with your favorite spices!
+      `;
+
+      return baseRecipe;
     }
 
-    fetchRecipe();
+    setLoading(true);
+
+    // Simulate delay (optional)
+    setTimeout(() => {
+      const result = generateRecipe(ingredients);
+      setRecipe(result);
+      setLoading(false);
+    }, 1000);
+
   }, [ingredients]);
 
   return (
