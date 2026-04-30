@@ -57,7 +57,7 @@ export default function ClaudeRecipe({ ingredients }) {
       if (detected.fat) {
         steps.push("Heat a pan and add oil for flavor.");
       } else {
-        steps.push("Heat a pan on medium flame.");
+        steps.push("Heat a pan in medium flame.");
       }
 
       if (detected.veg) {
