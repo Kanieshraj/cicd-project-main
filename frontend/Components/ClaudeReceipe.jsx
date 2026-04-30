@@ -10,43 +10,140 @@ export default function ClaudeRecipe({ ingredients }) {
         return "No ingredients provided.";
       }
 
-      // Simple logic (you can improve this later)
-      const baseRecipe = `
-🍽️ Simple Recipe Idea:
+      const items = ingredients.map(i => i.toLowerCase());
+
+      // 🧠 Ingredient classification
+      const types = {
+        protein: ["egg", "chicken", "paneer"],
+        carb: ["rice", "maggi", "bread", "pasta", "noodles"],
+        fat: ["ghee", "butter", "oil"],
+        spice: ["chilli", "pepper", "garam masala"],
+        sweet: ["sugar", "chocolate", "honey"],
+        veg: ["onion", "tomato", "carrot", "beans", "capsicum"]
+      };
+
+      let detected = {
+        protein: false,
+        carb: false,
+        fat: false,
+        spice: false,
+        sweet: false,
+        veg: false
+      };
+
+      items.forEach(item => {
+        Object.keys(types).forEach(type => {
+          if (types[type].includes(item)) {
+            detected[type] = true;
+          }
+        });
+      });
+
+      // 🍽️ Decide dish style
+      let style = "Fusion Dish";
+
+      if (detected.carb && detected.fat) style = "Comfort Bowl";
+      if (detected.protein && detected.spice) style = "Spicy Delight";
+      if (detected.sweet && detected.fat) style = "Sweet Treat";
+      if (detected.carb && detected.protein) style = "Hearty Meal";
+
+      const dishName = `${ingredients[0]} ${style}`;
+
+      // 🔥 Generate steps dynamically
+      let steps = [];
+
+      steps.push(`Start by preparing: ${ingredients.join(", ")}.`);
+
+      if (detected.fat) {
+        steps.push("Heat a pan and add ghee or oil for flavor.");
+      } else {
+        steps.push("Heat a pan on medium flame.");
+      }
+
+      if (detected.veg) {
+        steps.push("Sauté vegetables until soft and aromatic.");
+      }
+
+      if (detected.protein) {
+        steps.push("Add protein ingredients and cook thoroughly.");
+      }
+
+      if (detected.carb) {
+        steps.push("Add carbohydrate base like rice/noodles and mix well.");
+      }
+
+      steps.push("Add spices, salt, and seasoning to enhance taste.");
+
+      if (detected.sweet) {
+        steps.push("Balance flavors by adding a hint of sweetness.");
+      }
+
+      steps.push("Cook everything together until well combined.");
+      steps.push("Serve hot and enjoy your unique creation!");
+
+      // 👨‍🍳 Chef tips
+      const tips = [
+        "Try adding cheese for extra richness.",
+        "A squeeze of lemon can enhance flavors.",
+        "Garnish with fresh herbs for a premium touch.",
+        "Roasting ingredients first can improve taste."
+      ];
+
+      const randomTip = tips[Math.floor(Math.random() * tips.length)];
+
+      return `
+🍽️ ${dishName}
 
 Ingredients:
-${ingredients.map(item => `- ${item}`).join("\n")}
+${ingredients.map(i => `- ${i}`).join("\n")}
 
 Steps:
-1. Prepare all ingredients.
-2. Heat a pan and add some oil.
-3. Add ingredients one by one and cook well.
-4. Add salt and spices as needed.
-5. Cook for 10-15 minutes.
+${steps.map((s, i) => `${i + 1}. ${s}`).join("\n")}
 
-👨‍🍳 Tip: You can customize with your favorite spices!
+👨‍🍳 Chef Insight:
+${randomTip}
       `;
-
-      return baseRecipe;
     }
 
     setLoading(true);
 
-    // Simulate delay (optional)
     setTimeout(() => {
       const result = generateRecipe(ingredients);
       setRecipe(result);
       setLoading(false);
-    }, 1000);
+    }, 800);
 
   }, [ingredients]);
 
   return (
-    <section>
-      <h2>Chef Claude Recommends:</h2>
-      <article className="suggested-recipe-container" aria-live="polite">
-        {loading ? <p>Loading recipe...</p> : <pre>{recipe}</pre>}
+    <section style={styles.container}>
+      <h2>👨‍🍳 Chef Suggestion:</h2>
+
+      <article style={styles.card}>
+        {loading ? (
+          <p>Generating your recipe...</p>
+        ) : (
+          <pre style={styles.text}>{recipe}</pre>
+        )}
       </article>
     </section>
   );
 }
+
+const styles = {
+  container: {
+    marginTop: "20px"
+  },
+  card: {
+    background: "#f4f4f4",
+    padding: "20px",
+    borderRadius: "10px",
+    maxWidth: "600px",
+    margin: "auto",
+    textAlign: "left"
+  },
+  text: {
+    whiteSpace: "pre-wrap",
+    fontFamily: "monospace"
+  }
+};
