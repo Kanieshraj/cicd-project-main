@@ -55,7 +55,7 @@ export default function ClaudeRecipe({ ingredients }) {
       steps.push(`Start by preparing: ${ingredients.join(", ")}.`);
 
       if (detected.fat) {
-        steps.push("Heat a pan and add ghee or oil for flavor.");
+        steps.push("Heat a pan and add oil for flavor.");
       } else {
         steps.push("Heat a pan on medium flame.");
       }
